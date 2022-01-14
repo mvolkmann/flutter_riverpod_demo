@@ -54,6 +54,7 @@ class StateNotifierPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dog = ref.watch(dogNotifierProvider);
+    final notifier = ref.read(dogNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -67,7 +68,6 @@ class StateNotifierPage extends ConsumerWidget {
             ElevatedButton(
               child: Text('State Dog'),
               onPressed: () {
-                final notifier = ref.read(dogNotifierProvider.notifier);
                 notifier.setBreed('GSP');
                 notifier.setName('Oscar');
               },
