@@ -16,8 +16,6 @@ class ComputedProviderPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final price = ref.watch(priceStateProvider);
-    final tax = ref.watch(taxStateProvider);
     final total = ref.watch(totalStateProvider);
 
     return Scaffold(
@@ -29,25 +27,9 @@ class ComputedProviderPage extends ConsumerWidget {
           padding: EdgeInsets.all(10),
           child: Column(
             children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Price',
-                ),
-                initialValue: price.toString(),
-                keyboardType: TextInputType.number,
-                onChanged: (String value) => setPrice(ref, double.parse(value)),
-              ),
+              numberField('Price', priceStateProvider, ref),
               SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Tax',
-                ),
-                initialValue: tax.toString(),
-                keyboardType: TextInputType.number,
-                onChanged: (String value) => setTax(ref, double.parse(value)),
-              ),
+              numberField('Tax', taxStateProvider, ref),
               SizedBox(height: 10),
               Text('Total: \$${total.toStringAsFixed(2)}'),
             ],
@@ -57,11 +39,24 @@ class ComputedProviderPage extends ConsumerWidget {
     );
   }
 
-  void setPrice(ref, price) {
-    ref.read(priceStateProvider.state).state = price;
+  TextFormField numberField(
+    String label,
+    StateProvider provider,
+    WidgetRef ref,
+  ) {
+    final value = ref.watch(provider);
+    return TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: label,
+      ),
+      initialValue: value.toString(),
+      keyboardType: TextInputType.number,
+      onChanged: (String value) => setValue(provider, ref, double.parse(value)),
+    );
   }
 
-  void setTax(ref, tax) {
-    ref.read(taxStateProvider.state).state = tax;
+  void setValue(StateProvider provider, ref, value) {
+    ref.read(provider.state).state = value;
   }
 }
