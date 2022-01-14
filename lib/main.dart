@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'change_notifier_page.dart';
+import 'computed_provider_page.dart';
 import 'future_provider_page.dart';
 import 'provider_page.dart';
-import 'computed_provider_page.dart';
 import 'state_provider_page.dart';
 import 'stream_provider_page.dart';
 
@@ -28,6 +29,7 @@ final pages = <ConsumerWidget>[
   FutureProviderPage,
   StreamProviderPage,
   ComputedProviderPage,
+  ChangeNotifierPage,
 ];
 */
 
@@ -50,6 +52,7 @@ class MyApp extends StatelessWidget {
         FutureProviderPage.route: (_) => FutureProviderPage(),
         StreamProviderPage.route: (_) => StreamProviderPage(),
         ComputedProviderPage.route: (_) => ComputedProviderPage(),
+        ChangeNotifierPage.route: (_) => ChangeNotifierPage(),
       },
       /* TODO: Why doesn't this work?`
       routes: <String, WidgetBuilder>{
@@ -106,6 +109,12 @@ class Home extends StatelessWidget {
               child: Text('ComputedProvider'),
               onPressed: () {
                 Navigator.pushNamed(context, ComputedProviderPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('ChangeNotifier'),
+              onPressed: () {
+                Navigator.pushNamed(context, ChangeNotifierPage.route);
               },
             ),
             /*
