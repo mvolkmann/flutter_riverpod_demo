@@ -52,11 +52,11 @@ class ComputedProviderPage extends ConsumerWidget {
       ),
       initialValue: value.toString(),
       keyboardType: TextInputType.number,
-      onChanged: (String value) => setValue(provider, ref, double.parse(value)),
+      onChanged: (String value) => setValue(provider, ref, value),
     );
   }
 
   void setValue(StateProvider provider, ref, value) {
-    ref.read(provider.state).state = value;
+    ref.read(provider.state).state = double.parse(value);
   }
 }
