@@ -17,25 +17,17 @@ class StreamProviderPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final stream = ref.watch(streamProvider.stream);
+    final stream = ref.watch(streamProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('StreamProvider Demo'),
       ),
       body: Center(
-        child: StreamBuilder(
-          stream: stream,
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return CircularProgressIndicator();
-              default:
-                return Text(snapshot.hasError
-                    ? 'Error: ${snapshot.error}'
-                    : '${snapshot.data}');
-            }
-          },
+        child: stream.when(
+          loading: () => CircularProgressIndicator(),
+          data: (value) => Text('$value'),
+          error: (e, stack) => Text('Error: $e'),
         ),
       ),
     );
