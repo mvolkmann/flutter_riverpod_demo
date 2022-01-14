@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'state_provider_page.dart';
 import 'future_provider_page.dart';
+import 'state_provider_page.dart';
+import 'stream_provider_page.dart';
 
 // This provide a single, immutable value.
 // The ref parameter can be used to access other providers.
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         routes: {
           StateProviderPage.route: (_) => StateProviderPage(),
           FutureProviderPage.route: (_) => FutureProviderPage(),
+          StreamProviderPage.route: (_) => StreamProviderPage(),
         });
   }
 }
@@ -87,6 +89,12 @@ class Home extends ConsumerWidget {
               child: Text('FutureProvider'),
               onPressed: () {
                 Navigator.pushNamed(context, FutureProviderPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('StreamProvider'),
+              onPressed: () {
+                Navigator.pushNamed(context, StreamProviderPage.route);
               },
             ),
             /*
