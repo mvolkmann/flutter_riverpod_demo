@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'state_provider_page.dart';
+import 'future_provider_page.dart';
 
 // This provide a single, immutable value.
 // The ref parameter can be used to access other providers.
@@ -29,12 +31,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Riverpod Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Home(),
-    );
+        title: 'Riverpod Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Home(),
+        routes: {
+          StateProviderPage.route: (_) => StateProviderPage(),
+          FutureProviderPage.route: (_) => FutureProviderPage(),
+        });
   }
 }
 
@@ -54,7 +59,6 @@ class Home extends ConsumerWidget {
     // If the value of any watched provider changes,
     // this build method will be called again
     // to rebuild this entire widget.
-    final counter = ref.watch(counterStateProvider);
     final scores = ref.watch(scoresNotifierProvider);
 
     return Scaffold(
@@ -73,7 +77,18 @@ class Home extends ConsumerWidget {
               final greeting = ref.watch(greetingProvider);
               return Text(greeting);
             }),
-            Text('$counter'),
+            ElevatedButton(
+              child: Text('StateProvider'),
+              onPressed: () {
+                Navigator.pushNamed(context, StateProviderPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('FutureProvider'),
+              onPressed: () {
+                Navigator.pushNamed(context, FutureProviderPage.route);
+              },
+            ),
             /*
             Expanded(
               child: ListView.builder(
@@ -100,6 +115,7 @@ class Home extends ConsumerWidget {
   }
 
   void incrementCounter(ref) {
+    // This is overly complex!
     ref.read(counterStateProvider.state).state += 1;
   }
 }
