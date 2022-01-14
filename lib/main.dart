@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'future_provider_page.dart';
+import 'provider_page.dart';
 import 'state_provider_page.dart';
 import 'stream_provider_page.dart';
-
-// This provide a single, immutable value.
-// The ref parameter can be used to access other providers.
-// These could be used to compute the value of this provider.
-final greetingProvider = Provider((ref) => 'Hello, World!');
 
 final counterStateProvider = StateProvider<int>((ref) => 0);
 
@@ -38,6 +34,7 @@ class MyApp extends StatelessWidget {
         ),
         home: Home(),
         routes: {
+          ProviderPage.route: (_) => ProviderPage(),
           StateProviderPage.route: (_) => StateProviderPage(),
           FutureProviderPage.route: (_) => FutureProviderPage(),
           StreamProviderPage.route: (_) => StreamProviderPage(),
@@ -45,23 +42,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Extending ConsumerWidget instead of StatelessWidget
-// causes a WidgetRef argument to be passed to the build method.
-// ConsumerWidget extends ConsumerStatefulWidget which extends StatefulWidget.
-class Home extends ConsumerWidget {
+class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // This is one way to access the state of a provider
-    // that makes it available throughout this widget.
-    // When the value changes, this entire widget will be rebuilt.
-    final greeting = ref.watch(greetingProvider);
-
+  Widget build(BuildContext context) {
     // If the value of any watched provider changes,
     // this build method will be called again
     // to rebuild this entire widget.
-    final scores = ref.watch(scoresNotifierProvider);
+    //final scores = ref.watch(scoresNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -71,14 +60,12 @@ class Home extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(greeting),
-            // This is anothe way to access the state of a provider
-            // that limits the scope to a single child widget.
-            // When the value changes, only this child widget will be rebuilt.
-            Consumer(builder: (context, ref, child) {
-              final greeting = ref.watch(greetingProvider);
-              return Text(greeting);
-            }),
+            ElevatedButton(
+              child: Text('Provider'),
+              onPressed: () {
+                Navigator.pushNamed(context, ProviderPage.route);
+              },
+            ),
             ElevatedButton(
               child: Text('StateProvider'),
               onPressed: () {
@@ -106,24 +93,15 @@ class Home extends ConsumerWidget {
                 itemCount: scores.length,
               ),
             ),
-            */
-            FloatingActionButton(
-              child: Icon(Icons.add),
-              onPressed: () => incrementCounter(ref),
-            ),
             ElevatedButton(
               child: Text('Add Number'),
               //onPressed: () => scores.add(7),
               onPressed: () => ref.read(scoresNotifierProvider).add(7),
             ),
+            */
           ],
         ),
       ),
     );
-  }
-
-  void incrementCounter(ref) {
-    // This is overly complex!
-    ref.read(counterStateProvider.state).state += 1;
   }
 }
