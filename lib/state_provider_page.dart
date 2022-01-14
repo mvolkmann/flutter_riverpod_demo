@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Adding ".autoDispose" causes the provider to lose its state
 // there are no longer any widgets listening to it.
-// It this case it means that the value will reset to zero
-// every time we return to this page.
+// The value will reset to zero every time we return to this page.
 final counterStateProvider = StateProvider.autoDispose<int>((ref) => 0);
 
 // Extending ConsumerWidget instead of StatelessWidget

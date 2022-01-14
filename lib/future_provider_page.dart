@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// Adding ".autoDispose" causes the provider to lose its state
-// there are no longer any widgets listening to it.
-// It this case it means rather than using a cached value
-// every time we return to this page, it will be recomputed.
+// FutureProvider automatically caches results.
+// Adding ".autoDispose" causes it to lose the cached value
+// when there are no longer any widgets listening to it.
+// Every time we return to this page, it will be recomputed.
 final futureProvider = FutureProvider.autoDispose<int>((ref) async {
   // Simulate time to make a API request.
   await Future.delayed(Duration(seconds: 2));
