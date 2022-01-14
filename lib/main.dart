@@ -4,6 +4,7 @@ import 'change_notifier_page.dart';
 import 'computed_provider_page.dart';
 import 'future_provider_page.dart';
 import 'provider_page.dart';
+import 'state_notifier_page.dart';
 import 'state_provider_page.dart';
 import 'stream_provider_page.dart';
 
@@ -30,6 +31,7 @@ final pages = <ConsumerWidget>[
   StreamProviderPage,
   ComputedProviderPage,
   ChangeNotifierPage,
+  StartNotifierPage,
 ];
 */
 
@@ -53,6 +55,7 @@ class MyApp extends StatelessWidget {
         StreamProviderPage.route: (_) => StreamProviderPage(),
         ComputedProviderPage.route: (_) => ComputedProviderPage(),
         ChangeNotifierPage.route: (_) => ChangeNotifierPage(),
+        StateNotifierPage.route: (_) => StateNotifierPage(),
       },
       /* TODO: Why doesn't this work?`
       routes: <String, WidgetBuilder>{
@@ -115,6 +118,12 @@ class Home extends StatelessWidget {
               child: Text('ChangeNotifier'),
               onPressed: () {
                 Navigator.pushNamed(context, ChangeNotifierPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('StateNotifier'),
+              onPressed: () {
+                Navigator.pushNamed(context, StateNotifierPage.route);
               },
             ),
             /*

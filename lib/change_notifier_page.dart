@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DogNotifier extends ChangeNotifier {
+class DogChangeNotifier extends ChangeNotifier {
   String _breed = 'Whippet';
   String _name = 'Comet';
 
@@ -24,8 +24,9 @@ class DogNotifier extends ChangeNotifier {
 // Adding ".autoDispose" causes the provider to lose its state
 // there are no longer any widgets listening to it.
 // It also enables its "dispose" method to be called.
-final dogNotifierProvider = ChangeNotifierProvider.autoDispose<DogNotifier>(
-  (ref) => DogNotifier(),
+final dogChangeNotifierProvider =
+    ChangeNotifierProvider.autoDispose<DogChangeNotifier>(
+  (ref) => DogChangeNotifier(),
 );
 
 class ChangeNotifierPage extends ConsumerWidget {
@@ -35,7 +36,7 @@ class ChangeNotifierPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dog = ref.watch(dogNotifierProvider);
+    final dog = ref.watch(dogChangeNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
