@@ -29,7 +29,17 @@ class StreamProviderPage extends ConsumerWidget {
           data: (value) => Text('$value'),
           error: (e, stack) => Text('Error: $e'),
         ),
+        //TODO: What can't this be used instead of the above code?
+        //child: buildStream(stream),
       ),
+    );
+  }
+
+  Widget buildStream(stream) {
+    return stream.when(
+      loading: () => CircularProgressIndicator(),
+      data: (value) => Text('$value'),
+      error: (e, stack) => Text('Error: $e'),
     );
   }
 }
