@@ -12,10 +12,19 @@ class DogNotifier extends ChangeNotifier {
   }
 
   @override
+  void dispose() {
+    print('DogNotifier dispose called');
+    super.dispose();
+  }
+
+  @override
   String toString() => '$_name is a $_breed.';
 }
 
-final dogNotifierProvider = ChangeNotifierProvider<DogNotifier>(
+// Adding ".autoDispose" causes the provider to lose its state
+// there are no longer any widgets listening to it.
+// It also enables its "dispose" method to be called.
+final dogNotifierProvider = ChangeNotifierProvider.autoDispose<DogNotifier>(
   (ref) => DogNotifier(),
 );
 
