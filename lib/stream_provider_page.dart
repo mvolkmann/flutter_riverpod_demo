@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // StreamProvider automatically continues using the same stream.
 // Adding ".autoDispose" causes it to dispose of the strean
 // when there are no longer any widgets listening to it.
-// Every time we return to this page, it will create a new stream
-// starting from the beginning.
+// Every time we return to this page, it will
+// create a new stream starting from the beginning.
 final streamProvider = StreamProvider.autoDispose<int>(
   (ref) => Stream.periodic(Duration(seconds: 1), (index) => index + 1),
 );

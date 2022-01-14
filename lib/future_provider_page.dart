@@ -22,7 +22,7 @@ class FutureProviderPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('StateProvider Demo'),
+        title: Text('FutureProvider Demo'),
       ),
       body: Center(
         child: score.when(
