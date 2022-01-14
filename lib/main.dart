@@ -20,6 +20,15 @@ final scoresNotifierProvider =
   return ScoresNotifier();
 });
 
+/*
+final pages = <ConsumerWidget>[
+  ProviderPage,
+  StateProviderPage,
+  FutureProviderPage,
+  StreamProviderPage,
+];
+*/
+
 void main() => runApp(ProviderScope(child: MyApp()));
 
 class MyApp extends StatelessWidget {
@@ -28,17 +37,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Riverpod Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Home(),
-        routes: {
-          ProviderPage.route: (_) => ProviderPage(),
-          StateProviderPage.route: (_) => StateProviderPage(),
-          FutureProviderPage.route: (_) => FutureProviderPage(),
-          StreamProviderPage.route: (_) => StreamProviderPage(),
-        });
+      title: 'Riverpod Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Home(),
+      routes: {
+        ProviderPage.route: (_) => ProviderPage(),
+        StateProviderPage.route: (_) => StateProviderPage(),
+        FutureProviderPage.route: (_) => FutureProviderPage(),
+        StreamProviderPage.route: (_) => StreamProviderPage(),
+      },
+      /* TODO: Why doesn't this work?`
+      routes: <String, WidgetBuilder>{
+        for (var page in pages) page.route: (_) => page()
+      ),
+      */
+    );
   }
 }
 

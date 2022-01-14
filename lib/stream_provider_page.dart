@@ -31,10 +31,9 @@ class StreamProviderPage extends ConsumerWidget {
               case ConnectionState.waiting:
                 return CircularProgressIndicator();
               default:
-                if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                }
-                return Text('${snapshot.data}');
+                return Text(snapshot.hasError
+                    ? 'Error: ${snapshot.error}'
+                    : '${snapshot.data}');
             }
           },
         ),
