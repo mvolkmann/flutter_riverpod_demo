@@ -71,11 +71,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // If the value of any watched provider changes,
-    // this build method will be called again
-    // to rebuild this entire widget.
-    //final scores = ref.watch(scoresNotifierProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Riverpod Demo'),
@@ -126,21 +121,6 @@ class Home extends StatelessWidget {
                 Navigator.pushNamed(context, StateNotifierPage.route);
               },
             ),
-            /*
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return Text(scores[index].toString());
-                },
-                itemCount: scores.length,
-              ),
-            ),
-            ElevatedButton(
-              child: Text('Add Number'),
-              //onPressed: () => scores.add(7),
-              onPressed: () => ref.read(scoresNotifierProvider).add(7),
-            ),
-            */
           ],
         ),
       ),
